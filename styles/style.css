@@ -38,22 +38,35 @@ h1,h2,h3,h4,h5 {
     align-items: center;
     justify-content: center;
 }
+/* Current balance */
+#currentBalance{
+    font-size: 40pt;
+    font-weight: bolder;
+}
 
+/* income and expences */
 .divSections{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 20px;
+    margin: 0px 20px;
     padding: 20px;
     border-radius: 5px;
+    width: 250px;
     background-color: #ABC6D9;
 }
-/* Current balance */
-#currentBalance{
-    font-size: 20pt;
+.divSections h3{
+    font-size: 12pt;
     font-weight: bolder;
+    color: white;
 }
+.divSections p{
+    font-size: 30pt;
+    margin: 0;
+    color: white;
+}
+
 /* Table section */
 
 #activityTable{

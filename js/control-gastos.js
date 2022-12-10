@@ -11,10 +11,7 @@ const addExpenseAmount = document.querySelector('#expenseAmount');
 const addExpenseDescript = document.querySelector('#expenseDescription');
 const addExpenseButton = document.querySelector('#addExpenseModalButton');
 
-
-
 let arrayTransactions = [];
-
 
 let savingTotal = 0;
 
@@ -143,7 +140,6 @@ const displayFieldsModal = () => {
     fieldsModal.show();
 }
 
-
 //Eliminar una transacción
 const deleteTransaction = (row) => {
     let rowIndex = row.parentElement.rowIndex;
@@ -153,10 +149,7 @@ const deleteTransaction = (row) => {
 }
 
 // Event listeners y funciones
-
-
-
-addIncomeButton.addEventListener('click', addIncome);
-addExpenseButton.addEventListener('click', addExpense);
 getLocalStorage();
 refresh();
+addIncomeButton.addEventListener('click', addIncome);
+addExpenseButton.addEventListener('click', addExpense);
