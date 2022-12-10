@@ -16,20 +16,22 @@
 </head>
 <body>
     <header id="headerStyle">
-        <!-- <img src="imgs/img-header.jpg" alt="headerimage"> -->
-        <h1>CONTROL DE GASTOS</h1>
+        <img id ="headerpic" src="imgs/img-header.jpg" alt="headerimage">
     </header>
     <main id="main">
+        <section class="container">
+            <h1>CONTROL DE GASTOS</h1>
+        </section>
         <section class="container">
             <h2>CURRENT BALANCE</h2>
             <div id="currentBalance"> </div>
         </section>
-        <section class="container">
-            <div >
+        <section class="container2">
+            <div class="divSections">
                 <h3>Total incomes</h3>
                 <p id="totalIncomes"></p>
             </div>
-            <div>
+            <div class="divSections">
                 <h3 >Total expenses</h3>
                 <p id="totalExpenses"></p>
             </div>
@@ -43,17 +45,17 @@
 
         <section id="transactions" class="container">
             <h3>Transactions</h3>
-            <div id="transButtons">
+            <div id="transactionButtons">
                 <button 
                     id="addTransactionButton" 
-                    class="btn btn-lg"
+                    class="btn btn-lg btn-outline-secondary"
                     data-bs-toggle="modal"
                     data-bs-target="#incomeModal">
                     ADD INCOMES
                 </button>
                 <button 
                     id="addExpenseButton" 
-                    class="btn btn-lg"
+                    class="btn btn-lg btn-outline-secondary"
                     data-bs-toggle="modal"
                     data-bs-target="#expenseModal">
                     ADD EXPENSES
@@ -82,6 +84,9 @@
                         ></button>
                     </div>
                     <div class="modal-body">
+                        <div class="container">
+                            <img class="gifs" src="imgs/incomes.gif" />
+                        </div>
                         <label for="incomeDescription">Description</label>
                         <input 
                             id="incomeDescription"
@@ -97,7 +102,7 @@
                         <button
                             id="addIncomeModalButton"
                             type="button"
-                            class="btn"
+                            class="btn btn-outline-secondary"
                             data-bs-dismiss="modal"
                         >
                             Add incomes
@@ -127,6 +132,9 @@
                         ></button>
                     </div>
                     <div class="modal-body">
+                        <div class="container">
+                            <img class="gifs" src="imgs/expenses.gif" />
+                        </div>
                         <label for="expenseDescription">Description</label>
                         <input 
                             id="expenseDescription"
@@ -142,11 +150,69 @@
                         <button
                             id="addExpenseModalButton"
                             type="button"
-                            class="btn"
+                            class="btn btn-outline-secondary"
                             data-bs-dismiss="modal"
                         >
                             Add expenses
                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="modal fade"
+            id="notAvailableTransactionModal"
+            tabindex="-1"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            TRANSACTION NOT AVAILABLE
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <img class="gifs" src="imgs/nomoney.gif" />
+                        </div>
+                        <h6> Oops!! You don't have enought money for this transaction!!</h6> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="modal fade"
+            id="FieldsModal"
+            tabindex="-1"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            UNVALID FIELD VALUE 
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <img class="gifs" src="imgs/emptyfield.gif" />
+                        </div>
+                        <h6> Oops!! Fields cannot be empty!!!</h6>
+                        <h6> PD. Make sure you add a positive integer number in the amount section</h6>  
                     </div>
                 </div>
             </div>
@@ -168,13 +234,6 @@
                     rel="noopener noreferrer"
                 >
                     <img class="RRSS" src="imgs/github.png" />
-                </a>
-                <a
-                    href="https://www.whatsapp.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <img class="RRSS" src="imgs/whatsapp.png" />
                 </a>
             </nav>
         </footer>

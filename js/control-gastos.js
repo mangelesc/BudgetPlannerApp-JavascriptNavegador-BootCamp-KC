@@ -11,13 +11,25 @@ const addExpenseAmount = document.querySelector('#expenseAmount');
 const addExpenseDescript = document.querySelector('#expenseDescription');
 const addExpenseButton = document.querySelector('#addExpenseModalButton');
 
-const arrayTransactions = []
+
+
+let arrayTransactions = [];
+
 
 let savingTotal = 0;
 
 let incomesTotal = 0;
 let expensesTotal = 0;
 
+// Guardar/ Adquirir info desde Local Storage
+const saveLocalStorage = () => {
+    localStorage.setItem('serializedArrayTransactions', JSON.stringify(arrayTransactions));
+}
+
+const getLocalStorage = () => {
+    const serializedTransactions = localStorage.getItem('serializedArrayTransactions');
+    arrayTransactions= JSON.parse(serializedTransactions);
+}
 
 //Mostrar balance actual 
 const showCurrentBalance = () => {
@@ -28,7 +40,6 @@ const showCurrentBalance = () => {
     })
     currentBalanceP.innerHTML = savingTotal + ' €';
 }
-
 
 //Calcular incomes y expenses 
 const calculateIncomesExpenses = () => {
@@ -56,15 +67,20 @@ const showExpenses = () => {
 const createTransactionTr = () => {
     activityTable.innerHTML = '';
     //Recorro el array al revés, para luego poner usar el ined de la fila en deleteTransaction
-    for(let i = arrayTransactions.length-1; i >= 0; i--){
+    for(let i = 0 ; i < arrayTransactions.length; i++){
         const newExpense = document.createElement('tr');
-        let newRow = `<td>${arrayTransactions[i].description} </td>
-                    <td>${arrayTransactions[i].amount} €</td>
-                    <td onclick="deleteTransaction(this)"><img class="binIMG" src="imgs/bin.png" ></td>
-                    <td class="tableColor"></td>`;
+        let newRow = `<td class="tableDescript">${arrayTransactions[i].description} </td>
+                    <td class="tableAmount">${arrayTransactions[i].amount} €</td>
+                    <td class="tableDelete" onclick="deleteTransaction(this)">
+                        <img class="binIMG" src="imgs/bin.png" >
+                    </td>`;
+            if (arrayTransactions[i].amount > 0) {
+                newRow += `<td class="tableColorIncome"></td>`;
+            } else{
+                newRow += `<td class="tableColorExpense"></td>`;   
+            }            
         newExpense.innerHTML = newRow;
-
-        activityTable.insertAdjacentHTML('beforeend', newRow);
+        activityTable.insertAdjacentHTML('afterbegin', newRow);
     }
 }; 
 
@@ -75,6 +91,7 @@ const refresh = () => {
     showIncomes();
     showExpenses();
     createTransactionTr();
+    saveLocalStorage();
 }
 
 //Añadir un ingreso al array
@@ -86,8 +103,9 @@ const addIncome = () => {
         arrayTransactions.push({description,amount});
         refresh();
     } else {
-        alert("Ops, fields cannot be empty!\nMake sure you add a positive integer number in the amount section")
-    } 
+        displayFieldsModal();    } 
+    addIncomeDescript.value = '';
+    addIncomeAmount.value = '';
 }
 
 //Añadir un gasto al array
@@ -95,22 +113,50 @@ const addExpense = () => {
     const description = addExpenseDescript.value;
     let amount = addExpenseAmount.value;
     if (amount>0 && amount!= NaN &&description != ''){
-        amount =  parseFloat(-amount).toFixed(2);
-        arrayTransactions.push({description,amount});
-        refresh();
+        if((incomesTotal-amount) >= 0){
+            amount =  parseFloat(-amount).toFixed(2);
+            arrayTransactions.push({description,amount});
+            refresh();
+        }else {
+            displayErrorModal();
+        }
     } else {
-        alert("Ops, fields cannot be empty!\nMake sure you add a positive integer number in the amount section")
+        displayFieldsModal();
     } 
+    addExpenseDescript.value= '';
+    addExpenseAmount.value = '';
 }
+
+const displayErrorModal = () => {
+    let errorModal = new bootstrap.Modal(
+        document.getElementById("notAvailableTransactionModal"),
+        {}
+    );
+    errorModal.show();
+}
+
+const displayFieldsModal = () => {
+    let fieldsModal = new bootstrap.Modal(
+        document.getElementById("FieldsModal"),
+        {}
+    );
+    fieldsModal.show();
+}
+
 
 //Eliminar una transacción
 const deleteTransaction = (row) => {
     let rowIndex = row.parentElement.rowIndex;
-    arrayTransactions.splice(rowIndex,1);
+    let deletePosition = (arrayTransactions.length -1) - rowIndex;
+    arrayTransactions.splice(deletePosition,1);
     refresh();
 }
 
 // Event listeners y funciones
+
+
+
 addIncomeButton.addEventListener('click', addIncome);
 addExpenseButton.addEventListener('click', addExpense);
+getLocalStorage();
 refresh();
