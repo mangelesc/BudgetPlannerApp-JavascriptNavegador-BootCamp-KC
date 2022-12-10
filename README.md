@@ -14,7 +14,7 @@ La aplicación nos ayuda a gestionar nuestros ingresos y gastos, con el objetivo
 
 ## Ejemplo
 
-![Imagen inicial](.imgs/example.JPG)
-![Gastos introducidos](.imgs/example1.JPG)
-![Introducir ganancias](.imgs/example2.JPG)
-![Introducir gastos](.imgs/example3.JPG)
+![Imagen inicial](./imgs/example.jpg)
+![Gastos introducidos](./imgs/example1.jpg)
+![Introducir ganancias](./imgs/example2.jpg)
+![Introducir gastos](./imgs/example3.jpg)
