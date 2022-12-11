@@ -25,7 +25,11 @@ const saveLocalStorage = () => {
 
 const getLocalStorage = () => {
     const serializedTransactions = localStorage.getItem('serializedArrayTransactions');
+    if (serializedTransactions ==  null){
+    arrayTransactions = [];
+    } else {
     arrayTransactions= JSON.parse(serializedTransactions);
+    }
 }
 
 //Mostrar balance actual 
